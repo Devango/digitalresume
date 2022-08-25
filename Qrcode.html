@@ -13,7 +13,7 @@
 <body>
     <div id="container--main">
         <a href="index.html">&#x2190; Go Back</a>
-        <h1>PDF Merge application</h1>
+        <h1>QR code scan</h1>
 
         <!-- <ul>
                 <li><a href="#">Live Demo</a></li>
@@ -21,14 +21,33 @@
             </ul> -->
         <b>👉Requirement</b>
 
-        <p>Send customer statement and pending invoices as one pdf in Navision</p>
+        <p>When user Scan QR code of contact card, create customer in business central SAAS</p>
 
-        <b>👉Implementation</b>
+        <b>👉Implementation 1</b>
         <ul>
-            <li>Created .Net exe to merge pdfs using pdfsharp library and store generated file on server</li>
-            <li>Created new reports based on existing customer statement and standard sales invoice reports</li>
-            <li>Created code unit to create pdf files based on reports</li>
-            <li>Call .Net exe to merge pdfs with file path of created pdfs</li>
+            <li>Created Blazoer(asp.net Core) app which accepts Json as string parameter
+               parse string and create xml to return     
+            </li>
+            <li>Created control add-in in business central to call functions of the blazor app</li>
+            <li>The main purpose of using blazor is to eliminate dependancies of any external links(web apis or azure functions)</li>            
+            <li>Didn't finalize the design as it was cumbersome to add reference of javascripts(so many) to control add-in reference</li>
+        </ul>
+
+        <b>👉Implementation 2</b>
+        <ul>
+            <li>Converted blazor app to asp.net core mvc api project and exposed as api end point     
+            </li>
+            <li>Hosted project on Azure</li>
+            <li>Added necessary logs and api end points for tracing and debugging info</li>
+            <li>Calling web api with azure oauth2 authentication</li>
+            <li>Created codeunits, pages, stagging tables to parse xml returned from api and to store data</li>            
+        </ul>
+
+        <b>QR code generation</b>
+        <ul>
+            <li>There are multiple easy ways to create QR code, requiement was for sales invoice documents and hidden
+                field and implementation is available in BC sales header table 😉
+            </li>
         </ul>
     </div>
 </body>
